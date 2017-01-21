@@ -17,8 +17,11 @@
     "strong-error-handler": "^1.0.1"
   },
   "devDependencies": {
-    "eslint": "^2.13.1",
-    "eslint-config-loopback": "^4.0.0",
+    "eslint": "^3.13.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2",
+    "eslint-plugin-react": "^6.9.0",
+    "eslint-config-airbnb": "^14.0.0",
     "nsp": "^2.1.0"
   },
   "repository": {

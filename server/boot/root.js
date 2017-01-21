@@ -1,8 +1,13 @@
-'use strict';
+const pingRoute = require('./routes/ping');
 
 module.exports = function(server) {
-  // Install a `/` route that returns server status
   var router = server.loopback.Router();
-  router.get('/', server.loopback.status());
+
+  // Install a `/` route that returns server status
+  // router.get('/', server.loopback.status());
+
+  // Init other routes
+  pingRoute(router);
+
   server.use(router);
 };
