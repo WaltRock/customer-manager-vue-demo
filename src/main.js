@@ -1,3 +1,6 @@
-/* eslint-env browser */
+import Vue from 'vue';
+import App from './App.vue';
 
-document.querySelector('#app').innerHTML = 'Hello, from main.js!';
+new Vue({
+  render: h => h(App),
+}).$mount('#app');

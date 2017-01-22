@@ -36,10 +36,10 @@ module.exports = {
       },
     ],
   },
-  resolve: {
-    alias: {
-      src: `${ROOT}/src`,
-    },
-  },
+  // resolve: {
+  //   alias: {
+  //     src: `${ROOT}/src`,
+  //   },
+  // },
   devtool: '#eval-source-map',
 };

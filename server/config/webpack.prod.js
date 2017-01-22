@@ -21,14 +21,9 @@ module.exports = merge(baseConfig, {
       },
     }),
 
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-      },
-    }),
-
     new webpack.LoaderOptionsPlugin({
       minimize: true,
+      debug: false,
     }),
 
     // let webpack generate all your favicons and icons for you
