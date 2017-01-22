@@ -4,10 +4,11 @@
   "main": "server/server.js",
   "scripts": {
     "lint": "eslint .",
+    "test": "",
     "posttest": "npm run lint && nsp check",
-    "build": "rimraf client/*; NODE_ENV=production webpack --config server/config/webpack.prod.js --progress --hide-modules",
-    "start": "NODE_ENV=production node .",
-    "dev": "NODE_ENV=development nodemon -w server -w common ."
+    "dev": "NODE_ENV=development nodemon -w server -w common .",
+    "build": "rimraf client/* && NODE_ENV=production webpack --config server/config/webpack.prod.js --progress --hide-modules",
+    "start": "NODE_ENV=production node ."
   },
   "dependencies": {
     "compression": "^1.0.3",
