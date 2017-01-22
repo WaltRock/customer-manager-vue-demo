@@ -1,6 +1,6 @@
 {
-  "name": "02-customer-portal",
-  "version": "1.0.0",
+  "name": "loopback-vue-app",
+  "version": "0.1.0",
   "main": "server/server.js",
   "scripts": {
     "lint": "eslint .",
@@ -46,9 +46,9 @@
     "webpack-merge": "^2.4.0"
   },
   "repository": {
-    "type": "",
-    "url": ""
+    "type": "git",
+    "url": "https://github.com/w33ble/loopback-vue-app.git"
   },
   "license": "MIT",
-  "description": "02-customer-portal"
+  "description": "Loopback + Vue.js + Webpack boilerplate app"
 }
