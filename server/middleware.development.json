@@ -1,12 +1,4 @@
 {
-  "routes:before": {
-    "./middleware/webpack-dev": {
-      "params": { "enabled": true }
-    },
-    "./middleware/webpack-hmr": {
-      "params": { "enabled": true }
-    }
-  },
   "final:after": {
     "strong-error-handler": {
       "params": {

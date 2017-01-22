@@ -3,6 +3,13 @@ const loopback = require('loopback');
 const boot = require('loopback-boot');
 
 const app = module.exports = loopback();
+const isProduction = (process.env.NODE_ENV === 'production');
+
+const bootConfig = {
+  appRootDir: __dirname,
+};
+
+if (!isProduction) bootConfig.bootDirs = ['boot/dev'];
 
 // start the webserver
 app.start = () => app.listen(() => {
@@ -19,7 +26,7 @@ app.start = () => app.listen(() => {
 
 // Bootstrap the application, configure models, datasources and middleware.
 // Sub-apps like REST API are mounted via boot scripts.
-boot(app, __dirname, (err) => {
+boot(app, bootConfig, (err) => {
   if (err) throw err;
 
   // start the server if `$ node server.js`

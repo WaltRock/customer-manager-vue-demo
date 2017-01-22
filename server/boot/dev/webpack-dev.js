@@ -1,10 +1,10 @@
 const webpackMiddleware = require('webpack-dev-middleware');
-const webpack = require('./helpers/webpack');
+const webpack = require('../../helpers/webpack');
 
 const isProduction = (process.env.NODE_ENV === 'production');
 
-module.exports = (params) => {
-  if (isProduction || params.enabled !== true) return (req, res, next) => next();
+module.exports = (app) => {
+  if (isProduction) return;
 
   const middleware = webpackMiddleware(webpack.compiler, {
     publicPath: webpack.config.output.publicPath,
@@ -19,5 +19,5 @@ module.exports = (params) => {
     },
   });
 
-  return (req, res, next) => middleware(req, res, next);
+  app.use(middleware);
 };
