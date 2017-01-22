@@ -1,19 +1,8 @@
 /* eslint-disable no-console */
-const path = require('path');
 const loopback = require('loopback');
 const boot = require('loopback-boot');
 
 const app = module.exports = loopback();
-
-const bootOptions = {
-  appRootDir: path.resolve(__dirname),
-  bootScripts: [
-    'boot/authentication.js',
-    'boot/webpack-dev.js',
-    'boot/webpack-hmr.js',
-    'boot/root.js',
-  ],
-};
 
 // start the webserver
 app.start = () => app.listen(() => {
@@ -30,7 +19,7 @@ app.start = () => app.listen(() => {
 
 // Bootstrap the application, configure models, datasources and middleware.
 // Sub-apps like REST API are mounted via boot scripts.
-boot(app, bootOptions, (err) => {
+boot(app, __dirname, (err) => {
   if (err) throw err;
 
   // start the server if `$ node server.js`

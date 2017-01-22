@@ -3,7 +3,7 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..', '..');
 
 module.exports = {
-  entry: `${ROOT}/src/main.js`,
+  entry: [`${ROOT}/src/main.js`],
   output: {
     path: `${ROOT}/client`,
     publicPath: '/',

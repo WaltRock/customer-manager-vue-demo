@@ -1,7 +1,4 @@
 {
-  "initial:before": {
-    "loopback#favicon": {}
-  },
   "initial": {
     "compression": {},
     "cors": {
@@ -33,6 +30,10 @@
   "session": {},
   "auth": {},
   "parse": {},
+  "routes:before": {
+    "./middleware/webpack-dev": {},
+    "./middleware/webpack-hmr": {}
+  },
   "routes": {
     "loopback#rest": {
       "paths": [

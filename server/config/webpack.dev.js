@@ -7,7 +7,9 @@ const baseConfig = require('./webpack.base');
 const ROOT = path.resolve(__dirname, '..', '..');
 
 module.exports = merge(baseConfig, {
+  entry: ['webpack-hot-middleware/client'],
   plugins: [
+    // http://vue-loader.vuejs.org/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"development"',
@@ -23,5 +25,7 @@ module.exports = merge(baseConfig, {
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency',
     }),
+
+    new webpack.HotModuleReplacementPlugin(),
   ],
 });

@@ -13,21 +13,26 @@ module.exports = merge(baseConfig, {
   },
   // add sourcemaps to production build
   devtool: '#source-map',
-  // http://vue-loader.vuejs.org/en/workflow/production.html
   plugins: [
+    // http://vue-loader.vuejs.org/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"',
       },
     }),
+
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
       },
     }),
+
     new webpack.LoaderOptionsPlugin({
       minimize: true,
     }),
+
+    // let webpack generate all your favicons and icons for you
+    // https://github.com/jantimon/favicons-webpack-plugin
     new FaviconsWebpackPlugin({
       logo: path.join(ROOT, 'src', 'assets', 'logo.png'),
       persistentCache: false,
@@ -45,6 +50,7 @@ module.exports = merge(baseConfig, {
         windows: false,
       },
     }),
+
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
@@ -60,7 +66,9 @@ module.exports = merge(baseConfig, {
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency',
     }),
+
     // split vendor js into its own file
+    // prevents hash from being updated whenever app bundle is updated
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks(module) {
@@ -73,8 +81,9 @@ module.exports = merge(baseConfig, {
         );
       },
     }),
-    // extract webpack runtime and module manifest to its own file in order to
-    // prevent vendor hash from being updated whenever app bundle is updated
+
+    // extract webpack runtime and module manifest into its own file
+    // prevents hash from being updated whenever app bundle is updated
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
       chunks: ['vendor'],
