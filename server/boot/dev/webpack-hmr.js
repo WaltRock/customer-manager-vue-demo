@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpack = require('../../helpers/webpack');
 
