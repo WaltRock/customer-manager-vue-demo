@@ -1,7 +1,7 @@
 const pingRoute = require('./routes/ping');
 
-module.exports = function(server) {
-  var router = server.loopback.Router();
+module.exports = (server) => {
+  const router = server.loopback.Router();
 
   // Install a `/` route that returns server status
   // router.get('/', server.loopback.status());
