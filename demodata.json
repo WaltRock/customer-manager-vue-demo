@@ -5,7 +5,7 @@
     "ACL": 1,
     "RoleMapping": 1,
     "Role": 1,
-    "Customer": 2
+    "Customer": 1
   },
   "models": {
     "User": {},
@@ -13,8 +13,6 @@
     "ACL": {},
     "RoleMapping": {},
     "Role": {},
-    "Customer": {
-      "1": "{\"firstname\":\"Demo\",\"lastname\":\"User\",\"email\":\"demo@user.com\",\"id\":1}"
-    }
+    "Customer": {}
   }
 }
