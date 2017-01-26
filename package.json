@@ -35,6 +35,7 @@
     "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.26.0",
     "json-loader": "^0.5.4",
+    "minimist": "^1.2.0",
     "nodemon": "^1.11.0",
     "nsp": "^2.1.0",
     "rimraf": "^2.5.4",

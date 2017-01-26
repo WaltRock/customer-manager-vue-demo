@@ -1,8 +1,12 @@
 /* eslint-disable no-console,import/no-extraneous-dependencies */
 const net = require('net');
 const http = require('http');
-const https = require('https');
+const minimist = require('minimist');
 const { host, port } = require('../server/config');
+const fetchCustomers = require('./lib/fetch_customers');
+
+const argv = minimist(process.argv.slice(2));
+const modelName = argv._[0];
 
 function testConnection(conn) {
   return new Promise((resolve, reject) => {
@@ -14,68 +18,60 @@ function testConnection(conn) {
   });
 }
 
-function fetchCustomers(count = 1) {
-  const url = `https://randomuser.me/api/?nat=us&results=${count}`;
-  console.log('Seeding from https://randomuser.me/api/');
+function populateDatabase(model) {
+  console.log('Populating model:', model);
+  let task = false;
 
-  return new Promise((resolve, reject) => {
-    let userData = '';
+  switch (model.toLowerCase()) {
+    case 'customers':
+      task = fetchCustomers(100)
+      .then((customers) => {
+        const tasks = customers.map((customer) => {
+          return new Promise((resolve, reject) => {
+            const options = {
+              host,
+              port,
+              path: '/api/Customers',
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            };
 
-    https.get(url, (res) => {
-      res.setEncoding('utf8');
-      res.on('data', (chunk) => {
-        userData = `${userData}${chunk}`;
-      });
-      res.on('end', () => {
-        const { results } = JSON.parse(userData);
+            const req = http.request(options, (res) => {
+              res.setEncoding('utf8');
+              res.on('data', () => {});
+              res.on('end', resolve);
+            });
 
-        resolve(results.map(customer => ({
-          firstname: customer.name.first,
-          lastname: customer.name.last,
-          email: customer.email,
-          address: customer.location.street,
-          city: customer.location.city,
-          state: customer.location.state,
-          zipcode: customer.location.postcode,
-        })));
-      });
-    })
-    .on('error', err => reject(err));
+            req.on('error', reject)
+            req.write(JSON.stringify(customer));
+            req.end();
+          });
+        });
+
+        return Promise.all(tasks);
+      })
+      .then(results => console.log('Customer(s) added', results.length));
+      break;
+    default:
+      throw new Error(`Model not found or supported: ${model}`);
+  }
+
+  return task.catch((err) => {
+    console.log('FAILED to populate database', err);
+    process.exit(3);
   });
 }
 
-function populateDatabase() {
-  return fetchCustomers(100)
-  .then((customers) => {
-    const tasks = customers.map((customer) => {
-      return new Promise((resolve, reject) => {
-        const options = {
-          host,
-          port,
-          path: '/api/Customers',
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        };
-
-        const req = http.request(options, (res) => {
-          res.setEncoding('utf8');
-          res.on('data', () => {});
-          res.on('end', resolve);
-        });
-
-        req.on('error', reject)
-        req.write(JSON.stringify(customer));
-        req.end();
-      });
-    });
-
-    return Promise.all(tasks);
-  })
-  .catch(err => console.log('FAILED to populate database', err));
+if (!modelName) {
+  console.log('Please specify a model to populate');
+  process.exit(1);
 }
 
 testConnection({ host, port })
-.then(populateDatabase)
-.catch(() => console.log('Start the server to seed the database!'));
+.then(populateDatabase(modelName))
+.catch(() => {
+  console.log('Start the server to seed the database!');
+  process.exit(2);
+});
