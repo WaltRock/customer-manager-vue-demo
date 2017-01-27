@@ -36,8 +36,16 @@
     "dataSource": "db",
     "public": true
   },
+  "order": {
+    "dataSource": "db",
+    "public": true
+  },
   "product": {
     "dataSource": "db",
     "public": true
+  },
+  "orderProducts": {
+    "dataSource": "db",
+    "public": false
   }
 }

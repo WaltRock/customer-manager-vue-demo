@@ -1,6 +1,6 @@
 {
-  "name": "product",
-  "plural": "products",
+  "name": "order",
+  "plural": "orders",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -11,27 +11,24 @@
       "type": "string",
       "required": true
     },
-    "name": {
-      "type": "string",
-      "required": true
-    },
-    "description": {
-      "type": "string"
-    },
-    "price": {
+    "total": {
       "type": "number",
       "required": true
     },
-    "added": {
-      "type": "date",
-      "required": true
+    "datetime": {
+      "type": "date"
     }
   },
   "validations": [],
   "relations": {
-    "orders": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "customer",
+      "foreignKey": ""
+    },
+    "products": {
       "type": "hasMany",
-      "model": "order",
+      "model": "product",
       "foreignKey": "",
       "through": "orderProducts"
     }
