@@ -1,5 +1,5 @@
 {
-  "name": "Customer",
+  "name": "customer",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -7,7 +7,7 @@
   },
   "properties": {
     "id": {
-      "type": "String",
+      "type": "string",
       "required": false,
       "length": 64,
       "precision": null,

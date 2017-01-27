@@ -24,14 +24,14 @@ function populateDatabase(model) {
 
   switch (model.toLowerCase()) {
     case 'customers':
-      task = fetchCustomers(100)
+      task = fetchCustomers(37)
       .then((customers) => {
         const tasks = customers.map((customer) => {
           return new Promise((resolve, reject) => {
             const options = {
               host,
               port,
-              path: '/api/Customers',
+              path: '/api/customers',
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

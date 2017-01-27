@@ -5,7 +5,7 @@
     "ACL": 1,
     "RoleMapping": 1,
     "Role": 1,
-    "Customer": 1
+    "customer": 1
   },
   "models": {
     "User": {},
@@ -13,6 +13,6 @@
     "ACL": {},
     "RoleMapping": {},
     "Role": {},
-    "Customer": {}
+    "customer": {}
   }
 }
