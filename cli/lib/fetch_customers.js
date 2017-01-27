@@ -2,7 +2,7 @@
 const https = require('https');
 
 function fetchCustomers(count = 1) {
-  const url = `https://randomuser.me/api/?nat=us&results=${count}`;
+  const url = `https://randomuser.me/api/?nat=us,gb&results=${count}`;
   console.log('Seeding from https://randomuser.me/api/');
 
   return new Promise((resolve, reject) => {
