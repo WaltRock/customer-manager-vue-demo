@@ -24,8 +24,7 @@
   }
 </script>
 
-<style>
-  body {
-    background-color: #eee;
-  }
+<style lang="sass">
+  @import '~bulma/sass/utilities/_all'
+  @import '~bulma/sass/base/_all'
 </style>

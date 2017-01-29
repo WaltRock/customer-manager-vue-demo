@@ -9,6 +9,19 @@ const ROOT = path.resolve(__dirname, '..', '..');
 
 module.exports = merge(baseConfig, {
   entry: ['webpack-hot-middleware/client'],
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          loaders: {
+            sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax',
+          },
+        },
+      },
+    ],
+  },
   plugins: [
     // http://vue-loader.vuejs.org/en/workflow/production.html
     new webpack.DefinePlugin({

@@ -2,6 +2,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const baseConfig = require('./webpack.base');
@@ -14,6 +15,22 @@ module.exports = merge(baseConfig, {
   },
   // add sourcemaps to production build
   devtool: '#source-map',
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          loaders: {
+            sass: ExtractTextPlugin.extract({
+              loader: 'css-loader!sass-loader?indentedSyntax',
+              fallbackLoader: 'vue-style-loader',
+            }),
+          },
+        },
+      },
+    ],
+  },
   plugins: [
     // http://vue-loader.vuejs.org/en/workflow/production.html
     new webpack.DefinePlugin({
@@ -26,6 +43,9 @@ module.exports = merge(baseConfig, {
       minimize: true,
       debug: false,
     }),
+
+    // extract css into its own file
+    new ExtractTextPlugin(path.join('css', 'style.[contenthash].css')),
 
     // let webpack generate all your favicons and icons for you
     // https://github.com/jantimon/favicons-webpack-plugin
