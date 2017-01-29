@@ -25,6 +25,7 @@
 </script>
 
 <style lang="sass">
+  @import './styles/palette'
   @import '~bulma/sass/utilities/_all'
   @import '~bulma/sass/base/_all'
 </style>
