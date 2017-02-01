@@ -69,8 +69,10 @@
   @import '~bulma/sass/base/_all'
   @import '~bulma/sass/layout/section'
   @import '~bulma/sass/components/nav'
+  @import '~bulma/sass/components/card'
   @import '~bulma/sass/elements/button'
   @import '~bulma/sass/elements/other'
+  @import '~bulma/sass/grid/columns'
 
   @import '~font-awesome/css/font-awesome.css';
 </style>
