@@ -26,6 +26,10 @@
 
 <style lang="sass">
   @import './styles/palette'
+
+  // @import '~bulma'
   @import '~bulma/sass/utilities/_all'
   @import '~bulma/sass/base/_all'
+
+  @import '~font-awesome/css/font-awesome.css';
 </style>
