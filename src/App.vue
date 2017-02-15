@@ -44,7 +44,7 @@
 
 <script>
   export default {
-    name: 'app',
+    name: 'App',
     data() {
       return {
         count: 0

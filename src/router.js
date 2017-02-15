@@ -3,13 +3,16 @@ import VueRouter from 'vue-router';
 
 import App from './App.vue';
 
-import Customers from './containers/Customers.vue';
-import Orders from './containers/Orders.vue';
-import About from './containers/About.vue';
+import Customers from './pages/Customers.vue';
+import Orders from './pages/Orders.vue';
+import About from './pages/About.vue';
 
 Vue.use(VueRouter);
 
 const routes = [{
+  path: '/login',
+
+}, {
   path: '/',
   name: 'app',
   component: App,

@@ -2,7 +2,7 @@
   <section class="section">
     <div class="container">
       <div class="notification">
-        Orders will go here
+        About page...
       </div>
     </div>
   </section>
@@ -10,6 +10,6 @@
 
 <script>
   export default {
-
+    name: 'AboutPage',
   }
 </script>
