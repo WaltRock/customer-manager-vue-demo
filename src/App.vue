@@ -42,7 +42,7 @@
   export default {
     name: 'App',
     components: {
-      'top-nav': TopNav,
+      TopNav,
     }
   }
 </script>

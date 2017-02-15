@@ -5,7 +5,7 @@
 
       <div class="columns is-multiline">
         <div class="column is-one-third" v-for="customer in customers">
-          <CustomerCard :customer="customer">
+          <customer-card :customer="customer">
         </div>
       </div>
 
@@ -19,7 +19,7 @@
   export default {
     name: 'CustomerPage',
     components: {
-      CustomerCard
+      CustomerCard,
     },
     data() {
       const mockCustomer = (num) => ({

@@ -28,7 +28,7 @@
   export default {
     name: 'LoginPage',
     components: {
-      'top-nav': TopNav,
+      TopNav,
     },
     data () {
       return {
