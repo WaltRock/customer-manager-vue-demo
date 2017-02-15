@@ -1,13 +1,7 @@
 <template>
   <!-- top navigation -->
   <div id="app" class="container">
-    <nav class="nav has-shadow">
-      <div class="nav-left">
-        <div class="nav-item is-brand">
-          <router-link class="nav-item is-brand" to="/">Customer Management</router-link>
-        </div>
-      </div>
-
+    <top-nav title="Customer Management">
       <!-- This "nav-toggle" hamburger menu is only visible on mobile -->
       <!-- You need JavaScript to toggle the "is-active" class on "nav-menu" -->
       <span class="nav-toggle">
@@ -35,7 +29,7 @@
           </a>
         </span>
       </div>
-    </nav>
+    </top-nav>
 
     <!-- main app container -->
     <router-view></router-view>
@@ -43,8 +37,13 @@
 </template>
 
 <script>
+  import TopNav from './components/TopNav.vue';
+
   export default {
     name: 'App',
+    components: {
+      'top-nav': TopNav,
+    }
   }
 </script>
 
