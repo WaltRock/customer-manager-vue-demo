@@ -45,19 +45,6 @@
 <script>
   export default {
     name: 'App',
-    data() {
-      return {
-        count: 0
-      };
-    },
-    mounted() {
-      this.interval = setInterval(() => {
-        this.count += 1;
-      }, 1000);
-    },
-    destroyed() {
-      clearInterval(this.interval);
-    }
   }
 </script>
 
