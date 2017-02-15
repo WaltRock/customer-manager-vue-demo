@@ -19,7 +19,31 @@
 </template>
 
 <script>
+  import { getUser } from '../lib/authentication';
+
   export default {
     name: 'LoginPage',
+    data () {
+      return {
+        sendTo: {},
+      };
+    },
+    beforeRouteEnter (to, from, next) {
+      const getRedirect = () => {
+        const { prev, redirect } = to.query;
+        if (redirect !== undefined) return { name: redirect };
+        if (prev !== undefined) return { path: prev };
+        return { name: 'customers' };
+      }
+
+      return getUser().then(user => {
+        const sendTo = getRedirect();
+        // if already logged in, redirect
+        if (user) return next(sendTo);
+
+        // preserve the sendTo property, render the login page
+        next(vm => vm.sendTo = sendTo);
+      });
+    },
   }
 </script>
