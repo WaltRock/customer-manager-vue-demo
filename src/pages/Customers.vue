@@ -17,7 +17,7 @@
   import CustomerCard from '../components/CustomerCard.vue';
 
   export default {
-    name: 'CustomerPage',
+    name: 'customer-page',
     components: {
       CustomerCard,
     },

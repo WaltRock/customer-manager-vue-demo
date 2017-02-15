@@ -10,6 +10,6 @@
 
 <script>
   export default {
-    name: 'OrdersPage',
+    name: 'orders-page',
   }
 </script>

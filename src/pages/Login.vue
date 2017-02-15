@@ -26,7 +26,7 @@
   import TopNav from '../components/TopNav.vue';
 
   export default {
-    name: 'LoginPage',
+    name: 'login-page',
     components: {
       TopNav,
     },

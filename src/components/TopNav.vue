@@ -13,7 +13,7 @@
 
 <script>
   export default {
-    name: 'TopNav',
+    name: 'top-nav',
     props: {
       title: String,
     }
