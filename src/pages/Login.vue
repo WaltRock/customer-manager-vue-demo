@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  import { getUser } from '../lib/authentication';
+  import { isAuthenticated } from '../lib/authentication';
   import TopNav from '../components/TopNav.vue';
 
   export default {
@@ -43,7 +43,7 @@
         return { name: 'customers' };
       }
 
-      return getUser().then(user => {
+      return isAuthenticated().then(user => {
         const sendTo = getRedirect();
         // if already logged in, redirect
         if (user) return next(sendTo);

@@ -8,7 +8,7 @@ import Customers from './pages/Customers.vue';
 import Orders from './pages/Orders.vue';
 import About from './pages/About.vue';
 
-import { getUser } from './lib/authentication';
+import { isAuthenticated } from './lib/authentication';
 
 Vue.use(VueRouter);
 
@@ -51,7 +51,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   // check if any of the matched routes require authentication
   if (to.matched.some(record => record.meta.requiresAuthentication)) {
-    return getUser().then((user) => {
+    return isAuthenticated().then((user) => {
       // if user is authenticated, continue
       if (user) return next();
 
