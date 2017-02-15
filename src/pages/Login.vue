@@ -1,12 +1,15 @@
 <template>
   <div id="login" class="container">
-    <nav class="nav has-shadow">
-      <div class="nav-left">
-        <div class="nav-item is-brand">
-          <router-link class="nav-item is-brand" to="/">Customer Management</router-link>
-        </div>
+    <top-nav title="Customer Management">
+      <div class="nav-right nav-menu">
+        <span class="nav-item">
+          <a class="button" >
+            <span class="icon"><i class="fa fa-github"></i></span>
+            <span>Github</span>
+          </a>
+        </span>
       </div>
-    </nav>
+    </top-nav>
 
     <section class="section">
       <div class="container">
@@ -20,9 +23,13 @@
 
 <script>
   import { getUser } from '../lib/authentication';
+  import TopNav from '../components/TopNav.vue';
 
   export default {
     name: 'LoginPage',
+    components: {
+      'top-nav': TopNav,
+    },
     data () {
       return {
         sendTo: {},
