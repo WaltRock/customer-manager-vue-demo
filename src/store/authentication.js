@@ -16,13 +16,15 @@ export default {
 
       // TODO: login via the server
       return new Promise((resolve, reject) => {
-        if (!email || !password) {
-          commit('resetUser');
-          reject();
-        } else {
-          commit('setUser', email);
-          resolve();
-        }
+        setTimeout(() => {
+          if (!email || !password) {
+            commit('resetUser');
+            reject();
+          } else {
+            commit('setUser', email);
+            resolve();
+          }
+        }, 300);
       });
     },
     userLogout({ commit }) {
