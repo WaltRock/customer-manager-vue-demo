@@ -8,8 +8,6 @@ import Customers from './pages/Customers.vue';
 import Orders from './pages/Orders.vue';
 import About from './pages/About.vue';
 
-import { isAuthenticated } from './lib/authentication';
-
 Vue.use(VueRouter);
 
 const routes = [{
@@ -46,23 +44,6 @@ const routes = [{
 const router = new VueRouter({
   mode: 'hash',
   routes,
-});
-
-router.beforeEach((to, from, next) => {
-  // check if any of the matched routes require authentication
-  if (to.matched.some(record => record.meta.requiresAuthentication)) {
-    return isAuthenticated().then((user) => {
-      // if user is authenticated, continue
-      if (user) return next();
-
-      // otherwise, redirect to login, preserving the requested route
-      const { name, fullPath } = to;
-      const query = (name !== undefined) ? { redirect: name } : { prev: fullPath };
-      return next({ name: 'login', query });
-    });
-  }
-
-  return next();
 });
 
 export default router;
