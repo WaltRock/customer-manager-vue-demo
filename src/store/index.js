@@ -4,6 +4,7 @@ import createPersistedState from 'vuex-persistedstate';
 import lz from 'lz-string';
 
 import authentication from './authentication';
+import customers from './customers';
 
 Vue.use(Vuex);
 
@@ -12,6 +13,7 @@ const store = new Vuex.Store({
   },
   modules: {
     authentication,
+    customers,
   },
   plugins: [
     createPersistedState({
