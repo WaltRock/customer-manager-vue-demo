@@ -6,19 +6,30 @@
 
     <div class="container" v-if="!loading">
       <header class="is-clearfix">
-        <div class="control has-addons is-pulled-right">
-          <a class="button" :class="{ 'is-primary': mode === 'cards' }" @click="setMode('cards')">
-            <span class="icon is-small">
-              <i class="fa fa-th-large"></i>
-            </span>
-            <span>Cards</span>
-          </a>
-          <a class="button" :class="{ 'is-primary': mode === 'table' }" @click="setMode('table')">
-            <span class="icon is-small">
-              <i class="fa fa-table"></i>
-            </span>
-            <span>Table</span>
-          </a>
+        <div class="control is-grouped is-pulled-right">
+          <div class="control">
+            <a class="button" @click="fetchCustomers()">
+              <span class="icon is-small">
+                <i class="fa fa-refresh"></i>
+              </span>
+              <span>Reload</span>
+            </a>
+
+          </div>
+          <div class="control has-addons">
+            <a class="button" :class="{ 'is-primary': mode === 'cards' }" @click="setMode('cards')">
+              <span class="icon is-small">
+                <i class="fa fa-th-large"></i>
+              </span>
+              <span>Cards</span>
+            </a>
+            <a class="button" :class="{ 'is-primary': mode === 'table' }" @click="setMode('table')">
+              <span class="icon is-small">
+                <i class="fa fa-table"></i>
+              </span>
+              <span>Table</span>
+            </a>
+          </div>
         </div>
       </header>
 
@@ -62,14 +73,23 @@
         mode: 'cards',
       }
     },
-    computed: Object.assign({}, mapState('customers', ['customers', 'loading'])),
+    computed: Object.assign({}, mapState('customers', [
+      'customers',
+      'loading',
+      'updatedAt',
+    ])),
     methods: Object.assign({
       setMode(mode) {
         this.mode = (mode === 'table') ? 'table' : 'cards';
       },
-    }, mapActions('customers', ['fetchCustomers'])),
+    }, mapActions('customers', [
+      'fetchCustomers',
+    ])),
     created() {
-      this.fetchCustomers();
+      const diffTime = (new Date().getTime()) - this.updatedAt;
+      const seconds = 30;
+
+      if (diffTime >= seconds * 1000) this.fetchCustomers();
     },
   }
 </script>

@@ -3,26 +3,31 @@ export default {
   state: {
     loading: false,
     customers: [],
+    updatedAt: 0,
+    pagination: {
+      page: 0,
+      count: 10,
+    },
   },
   mutations: {
     setCustomers(state, customers) {
       state.customers = customers;
-      state.loaded = true;
+      state.updatedAt = new Date().getTime();
     },
-    toggleLoading(state) {
-      state.loading = !state.loading;
+    setPagination(state, opts = {}) {
+      if (opts.page) state.pagination.page = opts.page;
+      if (opts.count) state.pagination.count = opts.count;
+    },
+    toggleLoading(state, loading) {
+      state.loading = loading || !state.loading;
     },
   },
   actions: {
-    fetchCustomers({ commit }, opts = {}) {
-      commit('toggleLoading');
+    fetchCustomers({ commit, state }, opts = {}) {
+      commit('toggleLoading', true);
+      commit('setPagination', opts);
 
       // TODO: fetch customers from server
-      const options = Object.assign({
-        page: 0,
-        count: 10,
-      }, opts);
-
       return new Promise((resolve) => {
         const customers = [{
           id: 'ai7rgail73ria3uhr',
@@ -69,9 +74,10 @@ export default {
         }];
 
         setTimeout(() => {
-          const results = customers.slice(options.page, options.count);
+          const { page, count } = state.pagination;
+          const results = customers.slice(page, count);
           commit('setCustomers', results);
-          commit('toggleLoading');
+          commit('toggleLoading', false);
           resolve();
         }, 300);
       });
