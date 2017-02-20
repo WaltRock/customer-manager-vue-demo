@@ -5,6 +5,7 @@
         <th>Name</th>
         <th>Email</th>
         <th>City</th>
+        <th>Orders</th>
         <th></th>
       </tr>
     </thead>

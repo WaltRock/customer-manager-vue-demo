@@ -3,6 +3,7 @@
       <td>{{ this.name }}</td>
       <td>{{ customer.email }}</td>
       <td>{{ customer.city }}, {{ customer.state }}</td>
+      <td>XX</td>
       <td>
         <div class="control has-addons is-pulled-right">
           <a class="button is-outlined is-primary">
