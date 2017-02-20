@@ -14,7 +14,10 @@
     <section class="section">
       <div class="container">
         <div class="notification">
-          Login Here
+          Login Here...
+        </div>
+        <div class="notification">
+          {{ redirect }}
         </div>
       </div>
     </section>
@@ -22,7 +25,6 @@
 </template>
 
 <script>
-  import { isAuthenticated } from '../lib/authentication';
   import TopNav from '../components/TopNav.vue';
   import store from '../store'
 
@@ -31,12 +33,19 @@
     components: {
       TopNav,
     },
-    data () {
+    data() {
       return {
         sendTo: {},
       };
     },
-    beforeCreate() {
+    computed: {
+      redirect: function() {
+        return Object.keys(this.sendTo).reduce((str, val) => {
+          return str += `${val}: ${this.sendTo[val]}; `;
+        }, 'REDIRECT: ');
+      },
+    },
+    created() {
       const getRedirect = (query) => {
         const { prev, redirect } = query;
         if (redirect !== undefined) return { name: redirect };

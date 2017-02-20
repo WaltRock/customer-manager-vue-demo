@@ -35,6 +35,7 @@ const routes = [{
       name: 'about',
       component: About,
     }, {
+      // all other routes, including /, get redirected to /customers
       path: '*',
       redirect: 'customers',
     },
