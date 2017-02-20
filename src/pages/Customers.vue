@@ -1,6 +1,10 @@
 <template>
   <section class="section">
-    <div class="container">
+    <div class="container" v-if="loading">
+      Loading...
+    </div>
+
+    <div class="container" v-if="!loading">
       <header class="is-clearfix">
         <div class="control has-addons is-pulled-right">
           <a class="button" :class="{ 'is-primary': mode === 'cards' }" @click="setMode('cards')">
@@ -33,6 +37,7 @@
 </template>
 
 <script>
+  import { mapActions, mapState } from 'vuex';
   import CustomerCard from '../components/CustomerCard.vue';
   import CustomerTable from '../components/CustomerTable.vue';
   import CustomerRow from '../components/CustomerRow.vue';
@@ -55,20 +60,17 @@
 
       return {
         mode: 'cards',
-        customers: [
-          mockCustomer(1),
-          mockCustomer(2),
-          mockCustomer(3),
-          mockCustomer(4),
-          mockCustomer(5),
-        ],
       }
     },
-    methods: {
+    computed: Object.assign({}, mapState('customers', ['customers', 'loading'])),
+    methods: Object.assign({
       setMode(mode) {
         this.mode = (mode === 'table') ? 'table' : 'cards';
-      }
-    }
+      },
+    }, mapActions('customers', ['fetchCustomers'])),
+    created() {
+      this.fetchCustomers();
+    },
   }
 </script>
 
