@@ -69,6 +69,7 @@
   @import '~bulma/sass/components/card'
   @import '~bulma/sass/elements/button'
   @import '~bulma/sass/elements/form'
+  @import '~bulma/sass/elements/table'
   @import '~bulma/sass/elements/icon'
   @import '~bulma/sass/elements/notification'
   @import '~bulma/sass/elements/other'
