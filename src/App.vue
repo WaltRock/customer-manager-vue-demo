@@ -22,6 +22,9 @@
         <router-link class="nav-item is-tab" :to="{ name: 'about' }" active-class="is-active">
           About
         </router-link>
+        <a class="nav-item is-tab" @click="logout">
+          Logout
+        </a>
         <span class="nav-item">
           <a class="button" >
             <span class="icon"><i class="fa fa-github"></i></span>
@@ -45,6 +48,12 @@
     store,
     components: {
       TopNav,
+    },
+    methods: {
+      logout() {
+        store.dispatch('userLogout')
+        .then(() => this.$router.push({ name: 'login' }));
+      }
     },
     // pre-route auth checking
     beforeRouteEnter(to, from, next) {
