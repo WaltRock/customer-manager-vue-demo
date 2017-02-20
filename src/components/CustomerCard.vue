@@ -31,9 +31,9 @@
           const props = [
             'firstname',
             'lastname',
+            'email',
             'city',
             'state',
-            'email',
           ];
 
           return props.every(prop => !!value[prop]);
@@ -42,7 +42,6 @@
     },
     computed: {
       name() {
-        console.og
         return `${this.customer.firstname} ${this.customer.lastname}`;
       },
     },
