@@ -13,18 +13,35 @@
 
     <section class="section">
       <div class="container">
-        <div class="notification">
-          Login Here...
-        </div>
-        <div class="notification">
-          {{ redirect }}
-        </div>
+        <form @submit.prevent="doLogin">
+
+          <label class="label">Email</label>
+          <p class="control has-icon has-icon-left">
+            <input class="input" type="email" placeholder="Email" v-model="email">
+            <span class="icon is-small">
+              <i class="fa fa-envelope-open-o"></i>
+            </span>
+          </p>
+
+          <label class="label">Password</label>
+          <p class="control has-addons has-icon has-icon-left">
+            <input class="input is-expanded" type="password" placeholder="password" v-model="password">
+            <span class="icon is-small">
+              <i class="fa fa-key"></i>
+            </span>
+            <button type="" class="button is-primary">
+              Login
+            </button>
+          </p>
+
+        </form>
       </div>
     </section>
   </div>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
   import TopNav from '../components/TopNav.vue';
   import store from '../store'
 
@@ -35,15 +52,20 @@
     },
     data() {
       return {
+        email: '',
+        password: '',
         sendTo: {},
       };
     },
-    computed: {
-      redirect: function() {
-        return Object.keys(this.sendTo).reduce((str, val) => {
-          return str += `${val}: ${this.sendTo[val]}; `;
-        }, 'REDIRECT: ');
-      },
+    methods: {
+      doLogin() {
+        const { email, password } = this;
+
+        store.dispatch('userLogin', { email, password })
+        .then(() => {
+          this.$router.push(this.sendTo);
+        });
+      }
     },
     created() {
       const getRedirect = (query) => {
