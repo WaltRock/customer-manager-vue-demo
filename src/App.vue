@@ -71,6 +71,7 @@
   @import '~bulma/sass/elements/button'
   @import '~bulma/sass/elements/form'
   @import '~bulma/sass/elements/icon'
+  @import '~bulma/sass/elements/notification'
   @import '~bulma/sass/elements/other'
   @import '~bulma/sass/grid/columns'
 

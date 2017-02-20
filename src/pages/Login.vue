@@ -34,6 +34,11 @@
             </button>
           </p>
 
+          <div class="notification is-danger" v-if="badLogin">
+            <button class="delete" @click="badLogin = false"></button>
+            Login failed
+          </div>
+
         </form>
       </div>
     </section>
@@ -54,6 +59,7 @@
       return {
         email: '',
         password: '',
+        badLogin: false,
         sendTo: {},
       };
     },
@@ -63,7 +69,11 @@
 
         store.dispatch('userLogin', { email, password })
         .then(() => {
+          this.badLogin = false;
           this.$router.push(this.sendTo);
+        })
+        .catch(() => {
+          this.badLogin = true
         });
       }
     },
