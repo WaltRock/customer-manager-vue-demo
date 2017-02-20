@@ -13,9 +13,18 @@
       </div>
     </div>
     <footer class="card-footer">
-      <a class="card-footer-item">Save</a>
-      <a class="card-footer-item">Edit</a>
-      <a class="card-footer-item">Delete</a>
+      <a class="card-footer-item">
+        <span class="icon is-small">
+          <i class="fa fa-pencil"></i>
+        </span>
+        <span>&nbsp;Edit</span>
+      </a>
+      <a class="card-footer-item">
+        <span class="icon is-small">
+          <i class="fa fa-trash"></i>
+        </span>
+        <span>&nbsp;Delete</span>
+      </a>
     </footer>
   </div>
 </template>

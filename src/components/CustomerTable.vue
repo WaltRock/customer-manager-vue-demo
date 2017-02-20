@@ -5,7 +5,7 @@
         <th>Name</th>
         <th>Email</th>
         <th>City</th>
-        <th>Actions</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
