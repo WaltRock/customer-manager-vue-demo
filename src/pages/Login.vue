@@ -24,6 +24,7 @@
 <script>
   import { isAuthenticated } from '../lib/authentication';
   import TopNav from '../components/TopNav.vue';
+  import store from '../store'
 
   export default {
     name: 'login-page',
@@ -35,22 +36,21 @@
         sendTo: {},
       };
     },
-    beforeRouteEnter (to, from, next) {
-      const getRedirect = () => {
-        const { prev, redirect } = to.query;
+    beforeCreate() {
+      const getRedirect = (query) => {
+        const { prev, redirect } = query;
         if (redirect !== undefined) return { name: redirect };
         if (prev !== undefined) return { path: prev };
-        return { name: 'customers' };
+        return { name: 'app' };
       }
 
-      return isAuthenticated().then(user => {
-        const sendTo = getRedirect();
-        // if already logged in, redirect
-        if (user) return next(sendTo);
+      const sendTo = getRedirect(this.$route.query);
 
-        // preserve the sendTo property, render the login page
-        next(vm => vm.sendTo = sendTo);
-      });
+      // if authenticated, set to correct spot in the app
+      if (store.getters.isAuthenticated) return this.$router.replace(sendTo);
+
+      // if not authenticated, save redirect info for post-authentication redirect
+      return this.sendTo = sendTo;
     },
   }
 </script>

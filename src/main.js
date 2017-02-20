@@ -1,21 +1,17 @@
 import Vue from 'vue';
 import router from './router';
 import store from './store';
-import { isAuthenticated } from './lib/authentication';
 
 // pre-route auth checking
 router.beforeEach((to, from, next) => {
   // check if any of the matched routes require authentication
   if (to.matched.some(record => record.meta.requiresAuthentication)) {
-    return isAuthenticated().then((user) => {
-      // if user is authenticated, continue
-      if (user) return next();
+    if (store.getters.isAuthenticated) return next();
 
-      // otherwise, redirect to login, preserving the requested route
-      const { name, fullPath } = to;
-      const query = (name !== undefined) ? { redirect: name } : { prev: fullPath };
-      return next({ name: 'login', query });
-    });
+    // otherwise, redirect to login, preserving the requested route
+    const { name, fullPath } = to;
+    const query = (name !== undefined) ? { redirect: name } : { prev: fullPath };
+    return next({ name: 'login', query });
   }
 
   return next();

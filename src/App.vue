@@ -38,12 +38,24 @@
 
 <script>
   import TopNav from './components/TopNav.vue';
+  import store from './store'
 
   export default {
     name: 'App',
+    store,
     components: {
       TopNav,
-    }
+    },
+    // pre-route auth checking
+    beforeRouteEnter(to, from, next) {
+      // if user is authenticated, continue
+      if (store.getters.isAuthenticated) return next();
+
+      // otherwise, redirect to login, preserving the requested route
+      const { name, fullPath } = to;
+      const query = (name !== undefined) ? { redirect: name } : { prev: fullPath };
+      return next({ name: 'login', query });
+    },
   }
 </script>
 
