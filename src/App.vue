@@ -55,16 +55,6 @@
         .then(() => this.$router.push({ name: 'login' }));
       }
     },
-    // pre-route auth checking
-    beforeRouteEnter(to, from, next) {
-      // if user is authenticated, continue
-      if (store.getters.isAuthenticated) return next();
-
-      // otherwise, redirect to login, preserving the requested route
-      const { name, fullPath } = to;
-      const query = (name !== undefined) ? { redirect: name } : { prev: fullPath };
-      return next({ name: 'login', query });
-    },
   }
 </script>
 
