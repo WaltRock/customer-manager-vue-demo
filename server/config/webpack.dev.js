@@ -9,6 +9,7 @@ const ROOT = path.resolve(__dirname, '..', '..');
 
 module.exports = merge(baseConfig, {
   entry: ['webpack-hot-middleware/client'],
+  devtool: '#eval-source-map',
   module: {
     rules: [
       {
