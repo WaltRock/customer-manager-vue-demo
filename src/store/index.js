@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 
 import authentication from './authentication';
 
@@ -11,6 +12,9 @@ const store = new Vuex.Store({
   modules: {
     authentication,
   },
+  plugins: [
+    createPersistedState(),
+  ],
 });
 
 export default store;
