@@ -1,12 +1,18 @@
 export default {
   namespaced: true,
   state: {
-    loading: false,
     customers: [],
     updatedAt: 0,
     pagination: {
       page: 0,
       count: 10,
+    },
+  },
+  getters: {
+    shouldUpdate: state => (seconds = 30) => {
+      const diffTime = (new Date().getTime()) - state.updatedAt;
+      console.log('shouldUpdate', diffTime >= seconds * 1000)
+      return diffTime >= seconds * 1000;
     },
   },
   mutations: {
@@ -18,13 +24,12 @@ export default {
       if (opts.page) state.pagination.page = opts.page;
       if (opts.count) state.pagination.count = opts.count;
     },
-    toggleLoading(state, loading) {
-      state.loading = loading || !state.loading;
-    },
   },
   actions: {
+    setPagination({ commit }, opts = {}) {
+      commit('setPagination', opts);
+    },
     fetchCustomers({ commit, state }, opts = {}) {
-      commit('toggleLoading', true);
       commit('setPagination', opts);
 
       // TODO: fetch customers from server
@@ -77,7 +82,6 @@ export default {
           const { page, count } = state.pagination;
           const results = customers.slice(page, count);
           commit('setCustomers', results);
-          commit('toggleLoading', false);
           resolve();
         }, 300);
       });

@@ -1,14 +1,10 @@
 <template>
   <section class="section">
-    <div class="container" v-if="loading">
-      Loading...
-    </div>
-
-    <div class="container" v-if="!loading">
+    <div class="container">
       <header class="is-clearfix">
         <div class="control is-grouped is-pulled-right">
           <div class="control">
-            <a class="button" @click="fetchCustomers()">
+            <a class="button" :class="{ 'is-loading': loading }" @click="fetchCustomers()">
               <span class="icon is-small">
                 <i class="fa fa-refresh"></i>
               </span>
@@ -48,7 +44,7 @@
 </template>
 
 <script>
-  import { mapActions, mapState } from 'vuex';
+  import { mapState, mapGetters } from 'vuex';
   import CustomerCard from '../components/CustomerCard.vue';
   import CustomerTable from '../components/CustomerTable.vue';
   import CustomerRow from '../components/CustomerRow.vue';
@@ -61,35 +57,35 @@
       CustomerRow,
     },
     data() {
-      const mockCustomer = (num) => ({
-        firstname: 'John',
-        lastname: `Doe${num}`,
-        city: 'cityton',
-        state: 'AZ',
-        email: 'john@email.com',
-      });
-
       return {
         mode: 'cards',
+        loading: false,
       }
     },
     computed: Object.assign({}, mapState('customers', [
       'customers',
-      'loading',
       'updatedAt',
+    ]), mapGetters('customers', [
+      'shouldUpdate'
     ])),
-    methods: Object.assign({
+    methods: {
       setMode(mode) {
         this.mode = (mode === 'table') ? 'table' : 'cards';
       },
-    }, mapActions('customers', [
-      'fetchCustomers',
-    ])),
-    created() {
-      const diffTime = (new Date().getTime()) - this.updatedAt;
-      const seconds = 30;
+      fetchCustomers() {
+        this.loading = true;
 
-      if (diffTime >= seconds * 1000) this.fetchCustomers();
+        this.$store.dispatch('customers/fetchCustomers')
+        .then(() => this.loading = false);
+      }
+    },
+    created() {
+      if (this.shouldUpdate(30)) {
+        this.loading = true;
+
+        this.$store.dispatch('customers/fetchCustomers')
+        .then(() => this.loading = false);
+      }
     },
   }
 </script>
