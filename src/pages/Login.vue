@@ -29,7 +29,7 @@
             <span class="icon is-small">
               <i class="fa fa-key"></i>
             </span>
-            <button type="" class="button is-primary">
+            <button type="" class="button is-primary" :class="{ 'is-loading': pending }">
               Login
             </button>
           </p>
@@ -60,12 +60,16 @@
         email: '',
         password: '',
         badLogin: false,
+        pending: false,
         sendTo: {},
       };
     },
     methods: {
       doLogin() {
+        if (this.pending) return;
+
         const { email, password } = this;
+        this.pending = true;
 
         store.dispatch('userLogin', { email, password })
         .then(() => {
@@ -73,6 +77,7 @@
           this.$router.push(this.sendTo);
         })
         .catch(() => {
+          this.pending = false;
           this.badLogin = true
         });
       }
