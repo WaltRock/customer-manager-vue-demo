@@ -30,6 +30,7 @@ export default {
     userLogout({ commit }) {
       // TODO: logout via the server
       return new Promise((resolve) => {
+        // TODO: reset user state on logout
         commit('resetUser');
         resolve();
       });

@@ -11,7 +11,6 @@ export default {
   getters: {
     shouldUpdate: state => (seconds = 30) => {
       const diffTime = (new Date().getTime()) - state.updatedAt;
-      console.log('shouldUpdate', diffTime >= seconds * 1000)
       return diffTime >= seconds * 1000;
     },
   },

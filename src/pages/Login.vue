@@ -46,7 +46,6 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
   import TopNav from '../components/TopNav.vue';
   import store from '../store'
 
