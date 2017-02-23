@@ -18,7 +18,9 @@ const store = new Vuex.Store({
   plugins: [
     createPersistedState({
       getState(key) {
-        const state = lz.decompress(window.localStorage.getItem(key));
+        const storedState = window.localStorage.getItem(key);
+        if (!storedState) return {};
+        const state = lz.decompress(storedState);
         return JSON.parse(state);
       },
       setState(key, state) {
