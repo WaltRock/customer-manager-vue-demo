@@ -5,6 +5,9 @@ import App from '../App.vue';
 
 import Login from '../pages/Login.vue';
 import Customers from '../pages/Customers.vue';
+import CustomerView from '../pages/CustomerView.vue';
+import CustomerEdit from '../pages/CustomerEdit.vue';
+
 import Orders from '../pages/Orders.vue';
 import About from '../pages/About.vue';
 
@@ -26,6 +29,14 @@ const routes = [{
       path: 'customers',
       name: 'customers',
       component: Customers,
+    }, {
+      path: 'customer/:id',
+      name: 'customer-view',
+      component: CustomerView,
+    }, {
+      path: 'customer/:id/edit',
+      name: 'customer-edit',
+      component: CustomerEdit,
     }, {
       path: 'orders',
       name: 'orders',
