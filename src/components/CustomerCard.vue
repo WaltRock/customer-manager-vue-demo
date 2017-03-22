@@ -2,7 +2,9 @@
   <div class="card">
     <header class="card-header">
       <p class="card-header-title">
-        {{ this.name }}
+        <router-link :to="{ name: 'customer-view', params: { id: customer.id } }">
+          {{ this.name }}
+        </router-link>
       </p>
     </header>
     <div class="card-content">
@@ -13,12 +15,12 @@
       </div>
     </div>
     <footer class="card-footer">
-      <a class="card-footer-item">
+      <router-link class="card-footer-item" :to="{ name: 'customer-edit', params: { id: customer.id } }">
         <span class="icon is-small">
           <i class="fa fa-pencil"></i>
         </span>
-        <span>&nbsp;Edit</span>
-      </a>
+        &nbsp;Edit
+      </router-link>
       <a class="card-footer-item">
         <span class="icon is-small">
           <i class="fa fa-trash"></i>

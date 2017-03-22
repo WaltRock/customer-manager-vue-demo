@@ -1,17 +1,21 @@
 <template>
     <tr>
-      <td>{{ this.name }}</td>
+      <td>
+        <router-link :to="{ name: 'customer-view', params: { id: customer.id } }">
+          {{ this.name }}
+        </router-link>
+      </td>
       <td>{{ customer.email }}</td>
       <td>{{ customer.city }}, {{ customer.state }}</td>
       <td>XX</td>
       <td>
         <div class="control has-addons is-pulled-right">
-          <a class="button is-outlined is-primary">
+          <router-link class="button is-outlined is-primary" :to="{ name: 'customer-edit', params: { id: customer.id } }">
             <span class="icon is-small">
               <i class="fa fa-pencil"></i>
             </span>
-            <span>Edit</span>
-          </a>
+            &nbsp;Edit
+          </router-link>
           <a class="button is-outlined is-primary">
             <span class="icon is-small">
               <i class="fa fa-trash"></i>
