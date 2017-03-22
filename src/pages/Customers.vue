@@ -62,12 +62,15 @@
         loading: false,
       }
     },
-    computed: Object.assign({}, mapState('customers', [
-      'customers',
-      'updatedAt',
-    ]), mapGetters('customers', [
-      'shouldUpdate'
-    ])),
+    computed: {
+      ...mapState('customers', [
+        'customers',
+        'updatedAt',
+      ]),
+      ...mapGetters('customers', [
+        'shouldUpdate'
+      ]),
+    },
     methods: {
       setMode(mode) {
         this.mode = (mode === 'table') ? 'table' : 'cards';
