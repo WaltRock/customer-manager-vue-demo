@@ -15,6 +15,7 @@ export default {
       const diffTime = (new Date().getTime()) - state.updatedAt;
       return diffTime >= seconds * 1000;
     },
+    byId: state => id => state.customers.find(customer => customer.id === id),
   },
   mutations: {
     setCustomers(state, customers) {
