@@ -31,12 +31,12 @@
 
       <div class="columns is-multiline" v-if="mode === 'cards'">
         <div class="column is-one-third" v-for="customer in customers">
-          <customer-card :customer="customer">
+          <customer-card :customer="customer"></customer-card>
         </div>
       </div>
 
       <customer-table v-if="mode === 'table'">
-        <customer-row v-for="customer in customers" :customer="customer">
+        <customer-row v-for="customer in customers" :customer="customer"></customer-row>
       </customer-table>
 
     </div>
